@@ -34,6 +34,42 @@ for(letter of sentence.split("")){
         let count = map.get(caseInsensitiveLetter);
         map.set(caseInsensitiveLetter, count+1);
     }else{
-        map.set(letter,1);
+        map.set(caseInsensitiveLetter,1);
     }
 }
+
+console.log(map);
+// 
+
+console.log(Array.from(map, ([key, value])=>({key, value})));
+console.log(Array.from(newSet, item=>item));
+
+const arr = [1,2,3,4,5];
+
+console.log("some ", arr.some(item=> item %2 == 0));
+console.log("some ", arr.every(item=> item %2 == 0));
+
+// map which converts one type of array to another type it
+// return it as new array
+let kvArray = Array.from(map, ([key, value])=>({key, value}));
+console.log(kvArray);
+console.log(kvArray.map(currentItem => currentItem.value));
+
+console.log(kvArray);
+
+
+// Array.filter modify it's default behaviout using the prototype
+
+let originalFilterFn = Array.prototype.filter;
+
+
+
+Array.prototype.filter = function(cb){
+    // this refrence to the array on which filter is being applied
+    return originalFilterFn.call(this,(item)=>{
+        console.log(item)
+        return cb(item);
+    });
+}
+
+console.log([1,3,6,8].filter(item=>item % 2 == 0));
